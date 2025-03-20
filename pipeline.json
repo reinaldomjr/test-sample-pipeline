@@ -39,7 +39,7 @@
           },
           {
             "connectorName": "nlp",
-            "stagingName": "product-nonexistent"
+            "stagingName": "clients"
           }
         ]
       }
