@@ -11,7 +11,7 @@
     {
       "pipelineName": "newunifproduct_main",
       "pipelineDescription": "Pipeline for the product table, that uses staging nlp_product",
-      "outputDataModelName": "mdmproduct",
+      "outputDataModelName": "mdmproduct-invalid",
       "checkExistsDataToProcess": true,
       "overlapDeltaMinutes": 20,
       "saveToCds": true,
@@ -29,7 +29,7 @@
       "sourceEntities": {
         "dataModels": [
           {
-            "dataModelName": "mdmproduct"
+            "dataModelName": "mdmproduct-invalid"
           }
         ],
         "stagings": [
