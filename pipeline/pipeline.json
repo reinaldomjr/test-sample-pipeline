@@ -1,0 +1,48 @@
+{
+  "defaults": {
+    "cronExpressions": [
+      "0 */5 0 ? * * *"
+    ],
+    "prepareScripts": [
+      "prepare.sql"
+    ]
+  },
+  "pipelines": [
+    {
+      "pipelineName": "newunifproduct_main",
+      "pipelineDescription": "Pipeline for the product table, that uses staging nlp_product",
+      "outputDataModelName": "mdmproduct-invalid",
+      "checkExistsDataToProcess": true,
+      "overlapDeltaMinutes": 20,
+      "saveToCds": true,
+      "saveToUnified": true,
+      "saveToRealtime": true,
+      "shouldFanOut": false,
+      "sendToSubscriptions": true,
+      "useBatchNotification": true,
+      "tempTableRetentionPeriodDays": 1,
+      "cronExpressions": [
+        "0 0/3 * ? * MON-FRI *",
+        "0 0/2 * ? * SAT,SUN *"
+      ],
+      "processScript": "audproduct.csql",
+      "sourceEntities": {
+        "dataModels": [
+          {
+            "dataModelName": "mdmproduct-invalid"
+          }
+        ],
+        "stagings": [
+          {
+            "connectorName": "nlp",
+            "stagingName": "product"
+          },
+          {
+            "connectorName": "nlp",
+            "stagingName": "clients"
+          }
+        ]
+      }
+    }
+  ]
+}
